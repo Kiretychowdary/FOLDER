@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishna Reflection Effect</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+            height: 100%;
+            background-color: black;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+
+        .box {
+            color: #fff;
+            font-size: 100px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            animation: text-fade 2s 1;
+            -webkit-box-reflect: below 0px linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        }
+
+        .box span {
+            position: relative;
+            margin-left: 18px;
+            line-height: 0.83em;
+            animation: text-fade 3s 1;
+        }
+
+        .box span:first-child {
+            margin-left: 0;
+        }
+
+        .box span::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            box-shadow: -71px 0 71px black;
+            z-index: -1;
+        }
+
+        @keyframes text-fade {
+            0% {
+                opacity: 0;
+                left: 40px;
+            }
+
+            50% {
+                opacity: 0.5;
+                left: 10px;
+            }
+
+            100% {
+                opacity: 1;
+                left: 0;
+            }
+        }
+
+        .img1 {
+            right: 10%;
+            top: 25%;
+            position: absolute;
+            border-radius: 10px 10px;
+        }
+
+        .img1 img {
+            border-radius: 10px 10px;
+        }
+
+        .details {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .details a {
+            color: cyan;
+            margin-left: 40px;
+            transition: 0.8s;
+            text-decoration: none;
+        }
+
+        .details a:hover {
+            text-decoration: underline red;
+            transform: scale(1.1);
+        }
+
+        .content {
+            position: relative;
+            top: 20%;
+            color: white;
+            text-align: center;
+        }
+
+        .content h1 span.name {
+            color: cyan;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section>
+        <div class="container">
+            <div class="box">
+                <span>K</span>
+                <span>r</span>
+                <span>i</span>
+                <span>s</span>
+                <span>h</span>
+                <span>n</span>
+                <span>a</span>
+            </div>
+            <div class="img1">
+                <img src="Kirety.jpg" height="300px" width="300px" alt="Profile Image">
+            </div>
+        </div>
+
+        <div class="details">
+            <a href="#">About</a>
+            <a href="#">Hire Me</a>
+        </div>
+    </section>
+
+    <section>
+        <div class="content">
+            <h1>My Self <span class="name">Kirety</span>Manne</h1>
+            <div class="text"></div>
+            <p style="color: cyan;">Working As Software Developer</p>
+        </div>
+    </section>
+
+    <!-- Typed.js script -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        var option = {
+            strings: ["Web Developer", "Machine Learning Enthusiast", "Python Developer"],
+            typeSpeed: 50,
+            backSpeed: 25,
+            loop: true,
+        };
+        var typed = new Typed(".text", option);
+    </script>
+
+</body>
+
+</html>
