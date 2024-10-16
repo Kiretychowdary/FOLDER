@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="slider.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        .matter {
+            height: 100px;
+            width: 300px;
+            /* color: red; */
+            position: absolute;
+            bottom: 0;
+            
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .display {
+            /* color: blue; */
+            position: absolute;
+            animation: display 2s;
+            transform: translateX(-100%);
+        }
+
+        @keyframes display {
+            0% {
+                opacity: 0;
+            }
+
+            50%{
+                opacity: 0.5;
+            }
+          
+            100% {
+                opacity: 1;
+                /* transform: translateX(0); */
+            }
+        }
+      
+        .list {
+            display: flex;
+            width: calc(100% * 6); /* Adjust based on number of items */
+            transition: transform 0.5s ease;
+        }
+
+        .item {
+            flex: 0 0 100%; 
+            /* position: relative; */
+        }
+
+        /* .item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        } */
+
+
+    </style>
+</head>
+
+<body>
+    <section class="slider">
+        <div class="list">
+            <div class="item">
+                <img src="LOVESHIVA.jpg">
+                <!-- <div class="matter"> -->
+                    <!-- <h2>RADHAKRISHNA</h2> -->
+                <!-- </div> -->
+            </div>
+            <div class="item">
+                <img src="MYLOVEVRIDAVAN.jpg">
+                <!-- <div class="matter"> -->
+                    <!-- <h2>RADHAKRISHNA</h2> -->
+                <!-- </div> -->
+            </div>
+            <div class="item">
+                <!-- <img src="SARASWATHIDEVILOVE.jpg"> -->
+                <img src="LOVEKEDARNATH.jpg">
+                <!-- <div class="matter"> -->
+                    <!-- <h2>RADHAKRISHNA</h2> -->
+                <!-- </div> -->
+
+            </div>
+            <div class="item">
+                <img src="DWARAKALOVE.jpg">
+                <!-- <div class="matter"> -->
+                    <!-- <h2>RADHAKRISHNA</h2> -->
+                <!-- </div> -->
+
+            </div>
+            <div class="item">
+                <img src="LOVESHIVA.jpg">
+                <!-- <div class="matter"> -->
+                    <!-- <h2>RADHAKRISHNA</h2> -->
+                <!-- </div> -->
+
+            </div>
+            <div class="item">
+                <img src="LOVESHIVA.jpg">
+                <!-- <div class="matter"> -->
+                    <!-- <h2>RADHAKRISHNA</h2> -->
+                <!-- </div> -->
+
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button id="prev"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5z" />
+                </svg></button>
+            <button id="next"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+                </svg></button>
+        </div>
+        <ul class="dots">
+            <li class="active"></li> <!-- Added active class to the first dot -->
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li> <!-- Added one more dot to match the number of items -->
+        </ul>
+    </section>
+
+    <script>
+        const list = document.querySelector(".slider .list");
+        const items = document.querySelectorAll(".slider .list .item");
+        const next = document.getElementById("next");
+        const prev = document.getElementById("prev");
+        const dots = document.querySelectorAll(".dots li"); // Corrected selector
+
+        let active = 0;
+        let trans = false;
+
+        next.onclick = function () {
+            if (!trans) {
+                trans = true;
+                if (active + 1 > items.length - 1) {
+                    active = 0;
+                } else {
+                    active += 1;
+                }
+                nextSlide();
+            }
+        };
+
+        prev.onclick = function () {
+            if (!trans) {
+                trans = true;
+                if (active <= 0) {
+                    active = items.length - 1;
+                } else {
+                    active -= 1;
+                }
+                nextSlide();
+            }
+        };
+
+        let interval = setInterval(() => {
+            next.click();
+        }, 3000);
+
+        function check(element) {
+            let rec = element.getBoundingClientRect();
+            return (rec.top <= window.innerHeight && rec.bottom > 0);
+        }
+
+        function visible(ele) {
+            if (check(ele)) {
+                console.log("RADHAKRISHNA");
+                ele.classList.add("display");
+            }
+            else {
+                console.log("LOVE");
+            }
+        }
+
+        function nextSlide() {
+            let check = active * items[0].offsetWidth; 
+            list.style.transform = `translateX(-${check}px)`;
+
+            let activeDot = document.querySelector('.dots li.active');
+            activeDot.classList.remove('active');
+            dots[active].classList.add('active');
+
+
+            list.addEventListener('transitionend', () => {
+                trans = false; 
+            }, { once: true });
+        }
+
+
+
+
+
+
+
+
+
+        // const list = document.querySelector(".slider .list");
+        // const items = document.querySelectorAll(".slider .list .item");
+        // const next = document.getElementById("next");
+        // const prev = document.getElementById("prev");
+        // const dots = document.querySelectorAll(".dots li"); // Corrected selector
+
+        // let active = 0;
+
+        // next.onclick = function () {
+        //     if (active + 1 > items.length - 1) {
+        //         active = 0;
+        //     } else {
+        //         active += 1;
+        //     }
+        //     nextSlide();
+        // };
+
+        // prev.onclick = function () {
+        //     if (active <= 0) {
+        //         active = items.length - 1;
+        //     } else {
+        //         active -= 1;
+        //     }
+        //     nextSlide();
+        // };
+
+        // let interval = setInterval(() => {
+        //     next.click();
+        // }, 10000);
+
+        // function check(element){
+        //     let rec=element.getBoundingClientRect();
+        //     return(rec.top<=window.innerHeight && rec.bottom>0);
+        // }
+
+        // function visible(ele){
+        //     if(check(ele)){
+        //         console.log("RADHAKRISHNA");
+        //         ele.classList.add("display");
+        //     }
+        //     else{
+        //         console.log("LOVE");
+        //     }
+        // }
+
+        // function nextSlide() {
+
+        //     // const div_matter = document.querySelectorAll(".matter");
+        //     // console.log(div_matter);
+        //     // div_matter[active].classList.add("display");
+
+        //     // visible( div_matter[active]);
+
+        //     // console.log("RADHAKRISHNA");
+        //     // console.log(div_matter);
+        //     let check = items[active].offsetLeft;
+        //     list.style.left = -check + 'px';
+
+        //     let activeDot = document.querySelector('.dots li.active');
+        //     activeDot.classList.remove('active');
+        //     dots[active].classList.add('active');
+        //     // setTimeout(() => {
+        //     //      div_matter[active].classList.remove("display");
+        //     //     },
+        //     //  2990)
+        // }
+    </script>
+</body>
+
+</html>
