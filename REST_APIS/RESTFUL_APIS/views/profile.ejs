@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <% for(let posts of post) { %>
+        <img src="<%=posts.img %>" height="200px" widh="250px" >
+        <div>
+            <!-- <img src="<%=posts.img %>" height="100px" widh="100px" > -->
+            <div class="content">
+            <h3>USERNAME: &<%= posts.name %></h3>
+            <p><b>DIVIVNITY BELIEFE </b>: <%= posts.LOVE %></p>
+            <p>PERSON-ID: <strong><%= posts.id %></strong></p>
+            <p>PERSON-ID: <strong><%= posts.content %></strong></p>
+            <h3 class="link">See The Details Of The Accouunt <a href="http://localhost:8090/posts/<%=posts.id%>">Enter</a> &nbsp;<a href="http://localhost:8090/posts/<%=posts.id%>/edit">Edit</a></h3>
+        </div>
+            
+        </div> 
+    <%}%>
+</body>
+</html>
